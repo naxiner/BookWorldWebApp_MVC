@@ -1,6 +1,6 @@
-﻿using Bulky.DataAccess.Repository.IRepository;
-using Bulky.DataAcess.Data;
-using Bulky.Models;
+﻿using BookWorld.DataAccess.Repository.IRepository;
+using BookWorld.DataAcess.Data;
+using BookWorld.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bulky.DataAccess.Repository
+namespace BookWorld.DataAccess.Repository
 {
 	public class CategoryRepository : Repository<Category>, ICategoryRepository
 	{

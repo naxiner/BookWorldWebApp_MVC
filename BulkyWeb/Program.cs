@@ -1,9 +1,9 @@
-using Bulky.DataAccess.Repository;
-using Bulky.DataAccess.Repository.IRepository;
-using Bulky.DataAcess.Data;
+using BookWorld.DataAccess.Repository;
+using BookWorld.DataAccess.Repository.IRepository;
+using BookWorld.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace BulkyWeb
+namespace BookWorldWeb
 {
     public class Program
     {

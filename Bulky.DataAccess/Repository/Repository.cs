@@ -1,10 +1,10 @@
 ﻿using System.Linq.Expressions;
-using Bulky.DataAccess.Repository.IRepository;
-using Bulky.DataAcess.Data;
+using BookWorld.DataAccess.Repository.IRepository;
+using BookWorld.DataAcess.Data;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 
-namespace Bulky.DataAccess.Repository
+namespace BookWorld.DataAccess.Repository
 {
 	public class Repository<T> : IRepository<T> where T : class
 	{
