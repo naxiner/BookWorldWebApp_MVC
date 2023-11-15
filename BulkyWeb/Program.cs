@@ -1,7 +1,9 @@
 using BookWorld.DataAccess.Repository;
 using BookWorld.DataAccess.Repository.IRepository;
 using BookWorld.DataAcess.Data;
+using BookWorld.Utility;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookWorldWeb
@@ -17,10 +19,11 @@ namespace BookWorldWeb
             builder.Services.AddDbContext<ApplicationDbContext>(options=> 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 			
-            builder.Services.AddDefaultIdentity<IdentityUser>()
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();			
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
 
             var app = builder.Build();
 
