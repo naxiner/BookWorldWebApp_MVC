@@ -1,6 +1,7 @@
 using BookWorld.DataAccess.Repository;
 using BookWorld.DataAccess.Repository.IRepository;
 using BookWorld.DataAcess.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookWorldWeb
@@ -15,9 +16,11 @@ namespace BookWorldWeb
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options=> 
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+			
+            builder.Services.AddDefaultIdentity<IdentityUser>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+			
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
 
             var app = builder.Build();
 
@@ -33,7 +36,7 @@ namespace BookWorldWeb
             app.UseStaticFiles();
 
             app.UseRouting();
-
+			app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
