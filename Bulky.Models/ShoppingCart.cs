@@ -14,5 +14,7 @@ namespace BookWorld.Models
         [Range(1, 1000, ErrorMessage = "Можна додати не більше 1000")]
         public int Count { get; set; }
         public string ApplicationUserId { get; set; }
+        [NotMapped]
+        public double Price { get; set; }
     }
 }
