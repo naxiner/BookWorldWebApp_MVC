@@ -10,7 +10,10 @@ namespace BookWorld.DataAccess.Repository
 		public IProductRepository Product { get; private set; }
 		public ICompanyRepository Company { get; private set; }
         public IShoppingCartRepository ShoppingCart { get; private set; }
-		public IApplicationUserRepository ApplicationUserRepository {  get; private set; }
+		public IApplicationUserRepository ApplicationUserRepository { get; private set; }
+        public IOrderHeaderRepository OrderHeader { get; private set; }
+        public IOrderDetailRepository OrderDetail { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
 		{
 			_db = db;
@@ -19,7 +22,9 @@ namespace BookWorld.DataAccess.Repository
 			Company = new CompanyRepository(_db);
 			ShoppingCart = new ShoppingCartRepository(_db);
 			ApplicationUserRepository = new ApplicationUserRepository(_db);
-		}
+			OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetail = new OrderDetailRepository(_db);
+        }
 
 		public void Save()
 		{
