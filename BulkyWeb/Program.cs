@@ -1,3 +1,4 @@
+using BookWorld.DataAccess.DbInitializer;
 using BookWorld.DataAccess.Repository;
 using BookWorld.DataAccess.Repository.IRepository;
 using BookWorld.DataAcess.Data;
@@ -40,6 +41,7 @@ namespace BookWorldWeb
                 options.Cookie.IsEssential = true;
             });
 
+            builder.Services.AddScoped<IDbInitializer, DbInitializer>();
             builder.Services.AddRazorPages();			
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
@@ -63,12 +65,22 @@ namespace BookWorldWeb
 			app.UseAuthentication();
             app.UseAuthorization();
             app.UseSession();
+            SeedDataBase();
             app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
 				pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
 
 			app.Run();
+
+            void SeedDataBase()
+            {
+                using (var scope = app.Services.CreateScope())
+                {
+                    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+                    dbInitializer.Initialize();
+                }
+            }
         }
     }
 }
