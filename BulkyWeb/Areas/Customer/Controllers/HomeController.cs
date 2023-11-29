@@ -1,6 +1,8 @@
 ﻿using BookWorld.DataAccess.Repository.IRepository;
 using BookWorld.Models;
+using BookWorld.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
@@ -45,21 +47,24 @@ namespace BookWorldWeb.Areas.Customer.Controllers
             var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
             shoppingCart.ApplicationUserId = userId;
 
-            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.Get(u => u.ApplicationUserId == userId &&
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart
+                .Get(u => u.ApplicationUserId == userId && 
                 u.ProductId == shoppingCart.ProductId);
 
             if (cartFromDb != null)
             {
                 cartFromDb.Count += shoppingCart.Count;
                 _unitOfWork.ShoppingCart.Update(cartFromDb);
+                _unitOfWork.Save();
             }
             else
             {
                 _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(SD.SessionCart, 
+                    _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == userId).Count());
             }
             TempData["success"] = "Cart updated successfully";
-            
-            _unitOfWork.Save();
 
             return RedirectToAction(nameof(Index));
         }
