@@ -147,7 +147,8 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 			OrderVM.OrderDetail = _unitOfWork.OrderDetail
 				.GetAll(u => u.OrderHeaderId == OrderVM.OrderHeader.Id, includeProperties: "Product");
 
-            var domain = "https://localhost:7293/";
+            var domain = Request.Scheme + "://" + Request.Host.Value + "/";
+
             var options = new SessionCreateOptions
             {
                 SuccessUrl = domain + $"admin/order/PaymentConfirmation?orderHeaderId={OrderVM.OrderHeader.Id}",
