@@ -13,8 +13,9 @@ namespace BookWorld.Models
 		public string? City { get; set; }
 		public string? State { get; set; }
 		public string? PostalCode { get; set; }
-		[ForeignKey("CompanyId")]
+        public int? CompanyId { get; set; }
+        [ForeignKey("CompanyId")]
 		[ValidateNever]
-		public int? CompanyId { get; set; }
+		public Company Company { get; set; }
 	}
 }

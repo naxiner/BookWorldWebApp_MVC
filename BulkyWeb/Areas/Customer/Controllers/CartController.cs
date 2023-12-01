@@ -1,5 +1,4 @@
-﻿using BookWorld.DataAccess.Repository;
-using BookWorld.DataAccess.Repository.IRepository;
+﻿using BookWorld.DataAccess.Repository.IRepository;
 using BookWorld.Models;
 using BookWorld.Models.ViewModels;
 using BookWorld.Utility;
@@ -21,6 +20,7 @@ namespace BookWorldWeb.Areas.Customer.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+
         public IActionResult Index()
         {
             var claimsIdentity = (ClaimsIdentity)User.Identity;
@@ -195,7 +195,6 @@ namespace BookWorldWeb.Areas.Customer.Controllers
 
             return View(id);
         }
-
 
 		public IActionResult Plus(int cartId)
         {
