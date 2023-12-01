@@ -1,9 +1,8 @@
-var dataTable;
-
 $(document).ready(function () {
     loadDataTable();
 });
 
+var dataTable;
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": { url: '/admin/user/getall' },
@@ -14,16 +13,55 @@ function loadDataTable() {
             { data: 'company.name', "width": "15%" },
             { data: 'role', "width": "10%" },
             {
-                data: 'id',
+                data: { id: 'id', lockoutEnd: 'lockoutEnd' },
                 "render": function (data) {
-                    return `<div class="w-60 btn-group" role="group">
-                    <a href="/admin/company/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil"></i> Edit</a>
-                    <a onClick=Delete('/admin/company/delete/${data}') class="btn btn-primary"> <i class="bi bi-trash3""></i> Delete</a>
-                    <div>
-                    `
+                    var today = new Date().getTime();
+                    var lockout = new Date(data.lockoutEnd).getTime();
+
+                    if (lockout > today) {
+                        return `
+                        <div class="text-center">
+                            <a onclick=LockUnlock('${data.id}') class="btn btn-danger text-white" style="cursor:pointer; width:135px">
+                                <i class="bi bi-lock-fill"></i> Lock
+                            </a>
+                            <a class="btn btn-success text-white" style="cursor:pointer; width:165px">
+                                <i class="bi bi-pencil-square"></i> Permission
+                            </a>
+                        </div>
+                        `
+                    }
+                    else {
+                        return `
+                        <div class="text-center">
+                            <a onclick=LockUnlock('${data.id}') class="btn btn-success text-white" style="cursor:pointer; width:135px">
+                                <i class="bi bi-unlock-fill"></i> Unlock
+                            </a>
+                            <a class="btn btn-danger text-white" style="cursor:pointer; width:165px">
+                                <i class="bi bi-pencil-square"></i> Permission
+                            </a>
+                        </div>
+                        `
+                    }
                 },
-                "width": "21%"
+                "width": "27%"
             }
         ]
     });
+}
+
+function LockUnlock(id) {
+    $.ajax({
+        type: "POST",
+        url: '/Admin/User/LockUnlock',
+        data: JSON.stringify(id),
+        contentType: "application/json",
+        success: (data) => {
+            if (data.success) {
+                toastr.success(data.message);
+                dataTable.ajax.reload();
+            } else {
+                toastr.error(success.message);
+            }
+        }
+    })
 }
