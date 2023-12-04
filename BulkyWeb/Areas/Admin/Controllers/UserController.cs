@@ -5,6 +5,8 @@ using BookWorld.Utility;
 using Microsoft.AspNetCore.Authorization;
 using BookWorld.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
+using BookWorld.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookWorldWeb.Areas.Admin.Controllers
 {
@@ -21,6 +23,31 @@ namespace BookWorldWeb.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult RoleManagment(string userId)
+        {
+            string RoleId = _db.UserRoles.FirstOrDefault(u => u.UserId == userId).RoleId;
+
+            RoleManagmentVM RoleVM = new RoleManagmentVM
+            {
+                ApplicationUser = _db.ApplicationUsers.Include(u => u.Company)
+                    .FirstOrDefault(u => u.Id == userId),
+                RoleList = _db.Roles.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Name
+                }),
+                CompanyList = _db.Companies.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
+
+            RoleVM.ApplicationUser.Role = _db.Roles.FirstOrDefault(u => u.Id == RoleId).Name;
+
+            return View(RoleVM);
         }
 
         #region API CALLS
