@@ -7,6 +7,7 @@ using BookWorld.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 using BookWorld.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace BookWorldWeb.Areas.Admin.Controllers
 {
@@ -15,9 +16,11 @@ namespace BookWorldWeb.Areas.Admin.Controllers
     public class UserController : Controller
     {
         private readonly ApplicationDbContext _db;
-        public UserController(ApplicationDbContext db)
+        private readonly UserManager<IdentityUser> _userManager;
+        public UserController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
         {
             _db = db;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -50,9 +53,39 @@ namespace BookWorldWeb.Areas.Admin.Controllers
             return View(RoleVM);
         }
 
-        #region API CALLS
+        [HttpPost]
+		public IActionResult RoleManagment(RoleManagmentVM roleManagmentVM)
+		{
+			string RoleId = _db.UserRoles
+                .FirstOrDefault(u => u.UserId == roleManagmentVM.ApplicationUser.Id).RoleId;
+            string oldRole = _db.Roles.FirstOrDefault(u => u.Id == RoleId).Name;
 
-        [HttpGet]
+            if (!(roleManagmentVM.ApplicationUser.Role == oldRole))
+            {
+                ApplicationUser applicationUser = _db.ApplicationUsers
+                    .FirstOrDefault(u => u.Id == roleManagmentVM.ApplicationUser.Id);
+
+                if (roleManagmentVM.ApplicationUser.Role == SD.Role_Company)
+                {
+                    applicationUser.CompanyId = roleManagmentVM.ApplicationUser.CompanyId;
+                }
+                if (oldRole == SD.Role_Company)
+                {
+                    applicationUser.CompanyId = null;
+                }
+                _db.SaveChanges();
+
+                _userManager.RemoveFromRoleAsync(applicationUser, oldRole).GetAwaiter().GetResult();
+                _userManager.AddToRoleAsync(applicationUser, roleManagmentVM.ApplicationUser.Role)
+                    .GetAwaiter().GetResult();
+            }
+
+			return RedirectToAction("Index");
+		}
+
+		#region API CALLS
+
+		[HttpGet]
         public IActionResult GetAll()
         {
 			List<ApplicationUser> objUserList = _db.ApplicationUsers.Include(u=>u.Company).ToList();
