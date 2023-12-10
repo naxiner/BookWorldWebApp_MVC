@@ -17,8 +17,8 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data) {
                     return `<div class="w-60 btn-group" role="group">
-                    <a href="/admin/company/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil"></i> Edit</a>
-                    <a onClick=Delete('/admin/company/delete/${data}') class="btn btn-primary"> <i class="bi bi-trash3""></i> Delete</a>
+                    <a href="/admin/company/upsert?id=${data}" class="btn btn-primary mx-2"> <i class="bi bi-pencil"></i> Редагувати</a>
+                    <a onClick=Delete('/admin/company/delete/${data}') class="btn btn-primary"> <i class="bi bi-trash3""></i> Видалити</a>
                     <div>
                     `
                 },
@@ -30,13 +30,14 @@ function loadDataTable() {
 
 function Delete(url) {
     Swal.fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
+        title: "Ви впевнені?",
+        text: "Ви не зможене повернути видалений об'єкт!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!"
+        confirmButtonText: "Так, видалити!",
+        cancelButtonText: "Відмінити"
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({

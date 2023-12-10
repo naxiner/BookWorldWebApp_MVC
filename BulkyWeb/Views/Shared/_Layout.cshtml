@@ -26,33 +26,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="Customer" asp-controller="Home" asp-action="Index">Головна</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Manage Order</a>
+                            <a class="nav-link" asp-area="Admin" asp-controller="Order" asp-action="Index">Замовлення</a>
                         </li>
                         @if (User.IsInRole(SD.Role_Admin))
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Content Managment
+                                    Керувати контентом
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li class="dropdown-tiem">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Category</a>
+                                        <a class="nav-link" asp-area="Admin" asp-controller="Category" asp-action="Index">Категорії</a>
                                     </li>
                                     <li class="dropdown-tiem">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
+                                        <a class="nav-link" asp-area="Admin" asp-controller="Product" asp-action="Index">Товари</a>
                                     </li>
                                     <li class="dropdown-tiem">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
+                                        <a class="nav-link" asp-area="Admin" asp-controller="Company" asp-action="Index">Компанії</a>
                                     </li>
                                     <li class="dropdown-divider"></li>
                                     <li class="dropdown-tiem">
-                                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Create User</a>
+                                        <a class="nav-link" asp-area="Identity" asp-page="/Account/Register">Створити користувача</a>
                                     </li>
                                     <li class="dropdown-tiem">
-                                        <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">Manage User</a>
+                                        <a class="nav-link" asp-area="Admin" asp-controller="User" asp-action="Index">Користувачі</a>
                                     </li>
 
                                 </ul>

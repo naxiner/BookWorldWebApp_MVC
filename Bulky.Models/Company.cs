@@ -7,14 +7,17 @@ namespace BookWorld.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public string Name { get; set; }
-        [Display(Name = "Street Address")]
+		[Display(Name = "Назва")]
+		public string Name { get; set; }
+        [Display(Name = "Адреса")]
         public string? StreetAdress { get; set; }
-        public string? City { get; set; }
-        public string? State { get; set; }
-        [Display(Name = "Postal Code")]
+		[Display(Name = "Місто")]
+		public string? City { get; set; }
+		[Display(Name = "Країна")]
+		public string? State { get; set; }
+        [Display(Name = "Поштовий індекс")]
         public string? PostalCode { get; set; }
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Номер телефону")]
         public string? PhoneNumber { get; set; }
     }
 }

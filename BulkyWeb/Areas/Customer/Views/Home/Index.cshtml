@@ -15,7 +15,7 @@
 							</div>
 							<div class="pl-1">
 								<p class="text-dark text-opacity-75 text-center mb-0">
-									ListPrice: 
+									Рекомендована ціна: 
 									<span class="text-decoration-line-through">
 										@product.ListPrice.ToString()
 									</span>
@@ -24,12 +24,12 @@
 							</div>
 							<div class="pl-1">
 								<p class="text-dark text-opacity-75 text-center">
-									As low as: <span>@product.Price100.ToString()</span>₴
+									Ціна: <span>@product.Price100.ToString()</span>₴
 								</p>
 							</div>
 							<div>
 								<a asp-action="Details" asp-route-productId="@product.Id" class="btn btn-primary bg-gradient border-0 form-control">
-									Details
+									Детальніше
 								</a>
 							</div>
 						</div>

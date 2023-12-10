@@ -4,7 +4,7 @@
 	<div class="card-header bg-primary bg-gradient ml-0 py-3">
 		<div class="row">
 			<div class="col-12 text-center">
-				<h2 class="text-white py-2">@(Model.Product.Id != 0 ? "Update":"Create") Product</h2>
+				<h2 class="text-white py-2">@(Model.Product.Id != 0 ? "Оновити":"Створити") товар</h2>
 			</div>
 		</div>
 	</div>
@@ -57,7 +57,7 @@
 						<div class="row p-1">
 							<label asp-for="Product.CategoryId" class="p-0"></label>
 							<select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" type="text" class="form-select border-0 shadow">
-								<option disabled selected>--Select Category--</option>
+								<option disabled selected>--Оберіть категорію--</option>
 							</select>
 							<span asp-validation-for="Product.CategoryId" class="text-danger"></span>
 						</div>
@@ -69,16 +69,16 @@
 							<div class="col-6 col-md-3">
 								@if (Model.Product.Id != 0)
 								{
-									<button type="submit" class="btn btn-primary form-control">Update</button>
+									<button type="submit" class="btn btn-primary form-control">Оновити</button>
 								}
 								else
 								{
-									<button type="submit" class="btn btn-primary form-control">Create</button>
+									<button type="submit" class="btn btn-primary form-control">Створити</button>
 								}
 							</div>
 							<div class="col-6 col-md-3">
 								<a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary form-control border">
-									Back to List
+									Повернутись
 								</a>
 							</div>
 						</div>
@@ -97,7 +97,7 @@
 	<script>
 		tinymce.init({
 			selector: 'textarea',
-			plugins: 'mentions anchor autolink charmap codesample emoticons lists table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+			plugins: 'anchor autolink charmap codesample emoticons lists table visualblocks wordcount',
 			toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | align lineheight | tinycomments | checklist numlist bullist indent outdent',
 		});
 	</script>

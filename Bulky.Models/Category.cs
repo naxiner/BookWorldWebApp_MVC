@@ -9,10 +9,10 @@ namespace BookWorld.Models
         public int Id { get; set; }
         [Required]
         [MaxLength(24)]
-        [DisplayName("Category Name")]
+        [DisplayName("Назва категорії")]
         public string Name { get; set; }
-        [Range(1, 100, ErrorMessage = "Display Order must be between 1-100.")]
-        [DisplayName("Display Order")]
+        [Range(1, 100, ErrorMessage = "Позиція може бути в діапазоні: 1-100.")]
+        [DisplayName("Позиція відображення")]
         public int DisplayOrder { get; set; }
     }
 }
