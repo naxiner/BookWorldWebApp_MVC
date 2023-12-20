@@ -38,10 +38,13 @@ namespace BookWorld.Models
 		[Range(1, 10000)]
 		public double Price100 { get; set; }
 		[Display(Name = "Категорія")]
+		
 		public int CategoryId { get; set; }
 		[ForeignKey("CategoryId")]
 		[ValidateNever]
-        public Category Category { get; set; }
+		public Category Category { get; set; }
 
+		[ValidateNever]
+		public List<ProductImage> ProductImages { get; set; }
     }
 }
