@@ -42,8 +42,6 @@ namespace BookWorld.Models
 		[ForeignKey("CategoryId")]
 		[ValidateNever]
         public Category Category { get; set; }
-		[ValidateNever]
-		[Display(Name = "Обкладинка")]
-		public string ImageUrl { get; set; }
+
     }
 }

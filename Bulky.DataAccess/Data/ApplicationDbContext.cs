@@ -43,8 +43,7 @@ namespace BookWorld.DataAcess.Data
                     Price = 12.99,
                     Price50 = 11.5,
                     Price100 = 10,
-					CategoryId = 2,
-					ImageUrl = ""
+					CategoryId = 2
                 },
 				new Product
 				{
@@ -58,8 +57,7 @@ namespace BookWorld.DataAcess.Data
 					Price = 14.99,
 					Price50 = 13.5,
 					Price100 = 12.0,
-					CategoryId = 1,
-					ImageUrl = ""
+					CategoryId = 1
 				},
 				new Product
 				{
@@ -72,8 +70,7 @@ namespace BookWorld.DataAcess.Data
 					Price = 18.99,
 					Price50 = 17.0,
 					Price100 = 15.0,
-					CategoryId = 1,
-					ImageUrl = ""
+					CategoryId = 1
 				},
 				new Product
 				{
@@ -86,8 +83,7 @@ namespace BookWorld.DataAcess.Data
 					Price = 16.99,
 					Price50 = 15.0,
 					Price100 = 13.5,
-					CategoryId = 1,
-					ImageUrl = ""
+					CategoryId = 1
 				}
 				);
         }

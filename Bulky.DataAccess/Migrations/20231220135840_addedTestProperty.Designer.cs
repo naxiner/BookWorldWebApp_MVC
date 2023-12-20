@@ -4,6 +4,7 @@ using BookWorld.DataAcess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookWorld.DataAcess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231220135840_addedTestProperty")]
+    partial class addedTestProperty
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,6 +226,10 @@ namespace BookWorld.DataAcess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -234,6 +241,9 @@ namespace BookWorld.DataAcess.Migrations
 
                     b.Property<double>("Price50")
                         .HasColumnType("float");
+
+                    b.Property<int>("TestProperty")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -253,10 +263,12 @@ namespace BookWorld.DataAcess.Migrations
                             CategoryId = 2,
                             Description = "Збірка захоплюючих детективних розслідувань відомого сищика Шерлока Холмса та його надільного друга Доктора Ватсона.",
                             ISBN = "978-0486223757",
+                            ImageUrl = "",
                             ListPrice = 12.99,
                             Price = 12.99,
                             Price100 = 10.0,
                             Price50 = 11.5,
+                            TestProperty = 0,
                             Title = "Пригоди Шерлока Холмса"
                         },
                         new
@@ -266,10 +278,12 @@ namespace BookWorld.DataAcess.Migrations
                             CategoryId = 1,
                             Description = "Антиутопічний роман, який описує життя в тоталітарному суспільстві, де кожен рух та слово контролюються державою.",
                             ISBN = "978-0451524935",
+                            ImageUrl = "",
                             ListPrice = 14.99,
                             Price = 14.99,
                             Price100 = 12.0,
                             Price50 = 13.5,
+                            TestProperty = 0,
                             Title = "1984"
                         },
                         new
@@ -279,10 +293,12 @@ namespace BookWorld.DataAcess.Migrations
                             CategoryId = 1,
                             Description = "Епічна фентезі-сага про боротьбу за владу в країні Вестерос.",
                             ISBN = "978-0553103540",
+                            ImageUrl = "",
                             ListPrice = 18.989999999999998,
                             Price = 18.989999999999998,
                             Price100 = 15.0,
                             Price50 = 17.0,
+                            TestProperty = 0,
                             Title = "Гра престолів"
                         },
                         new
@@ -292,10 +308,12 @@ namespace BookWorld.DataAcess.Migrations
                             CategoryId = 1,
                             Description = "Початок пригод молодого чаклуна Гаррі Поттера в чарівному світі.",
                             ISBN = "978-0590353403",
+                            ImageUrl = "",
                             ListPrice = 16.989999999999998,
                             Price = 16.989999999999998,
                             Price100 = 13.5,
                             Price50 = 15.0,
+                            TestProperty = 0,
                             Title = "Гаррі Поттер і Філософський камінь"
                         });
                 });
