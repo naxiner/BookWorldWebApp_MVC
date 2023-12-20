@@ -47,7 +47,8 @@ namespace BookWorldWeb.Areas.Admin.Controllers
             else
             {
                 // To update
-				productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+				productVM.Product = _unitOfWork.Product.Get(u => u.Id == id,
+                    includeProperties:"ProductImages");
 				return View(productVM);
 			}
         }
@@ -118,6 +119,34 @@ namespace BookWorldWeb.Areas.Admin.Controllers
             }
         }
 
+        public IActionResult DeleteImage(int imageId)
+        {
+            var imageToBeDeleted = _unitOfWork.ProductImage.Get(u => u.Id == imageId);
+            int ProductId = imageToBeDeleted.ProductId;
+
+			if (imageToBeDeleted != null)
+            {
+                if (!string.IsNullOrEmpty(imageToBeDeleted.ImageUrl))
+                {
+                    var oldImagePath =
+                        Path.Combine(_webHostEnvironment.WebRootPath,
+                        imageToBeDeleted.ImageUrl.TrimStart('\\'));
+
+                    if (System.IO.File.Exists(oldImagePath))
+                    {
+                        System.IO.File.Delete(oldImagePath);
+                    }
+                }
+
+                _unitOfWork.ProductImage.Remove(imageToBeDeleted);
+                _unitOfWork.Save();
+
+                TempData["success"] = "Зображення видалено успішно!";
+			}
+
+            return RedirectToAction(nameof(Upsert), new { id = ProductId });
+        }
+
         #region API CALLS
 
         [HttpGet]
@@ -135,15 +164,6 @@ namespace BookWorldWeb.Areas.Admin.Controllers
             {
                 return Json(new { success = false, message = "Error while deleting." });
             }
-
-			/*var oldImagePath = 
-                Path.Combine(_webHostEnvironment.WebRootPath, 
-                productToBeDeleted.ImageUrl.TrimStart('\\'));
-
-			if (System.IO.File.Exists(oldImagePath))
-			{
-				System.IO.File.Delete(oldImagePath);
-			}*/
 
             _unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
