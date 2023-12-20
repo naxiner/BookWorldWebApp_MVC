@@ -7,7 +7,6 @@ using BookWorld.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using BookWorld.Utility;
 using Microsoft.AspNetCore.Authorization;
-using Stripe;
 
 namespace BookWorldWeb.Areas.Admin.Controllers
 {
@@ -24,7 +23,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
+            var objProductList = _unitOfWork.Product.GetAll(includeProperties:"Category").ToList();
             return View(objProductList);
         }
 
@@ -32,12 +31,12 @@ namespace BookWorldWeb.Areas.Admin.Controllers
         {
             ProductVM productVM = new()
             {
+                Product = new (),
 				CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
 				{
 					Text = u.Name,
 					Value = u.Id.ToString()
 				}),
-                Product = new Product()
             };
 
             if(id == null || id == 0)
@@ -153,7 +152,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-			List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
+			var objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
 		    return Json(new {data = objProductList});
         }
 
