@@ -7,6 +7,7 @@ using BookWorld.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using BookWorld.Utility;
 using Microsoft.AspNetCore.Authorization;
+using Stripe;
 
 namespace BookWorldWeb.Areas.Admin.Controllers
 {
@@ -165,10 +166,23 @@ namespace BookWorldWeb.Areas.Admin.Controllers
                 return Json(new { success = false, message = "Error while deleting." });
             }
 
-            _unitOfWork.Product.Remove(productToBeDeleted);
+			string productPath = @"images\products\product-" + id;
+			string finalPath = Path.Combine(_webHostEnvironment.WebRootPath, productPath);
+
+            if (Directory.Exists(finalPath))
+            {
+                string[] filePaths = Directory.GetFiles(finalPath);
+                foreach (string filePath in filePaths)
+                {
+                    System.IO.File.Delete(filePath);
+                }
+
+                Directory.Delete(finalPath);
+            }
+
+			_unitOfWork.Product.Remove(productToBeDeleted);
             _unitOfWork.Save();
 
-			List<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category").ToList();
 			return Json(new { success = true, message = "Delete Successful" });
 		}
 
