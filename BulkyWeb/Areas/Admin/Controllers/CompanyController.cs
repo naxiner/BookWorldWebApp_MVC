@@ -51,7 +51,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 				}
 
                 _unitOfWork.Save();
-                TempData["success"] = "Company successfully created!";
+                TempData["success"] = "Компанію успішно створено!";
                 return RedirectToAction("Index");
             }
             else

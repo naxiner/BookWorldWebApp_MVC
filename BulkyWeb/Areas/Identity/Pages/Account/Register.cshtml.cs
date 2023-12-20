@@ -204,7 +204,7 @@ namespace BookWorldWeb.Areas.Identity.Pages.Account
                     {
                         if (User.IsInRole(SD.Role_Admin))
                         {
-                            TempData["success"] = "New User Created Successfully";
+                            TempData["success"] = "Новий користувач успішно створений!";
                         }
                         else
                         {

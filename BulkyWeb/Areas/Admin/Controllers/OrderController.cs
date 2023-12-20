@@ -63,7 +63,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 			_unitOfWork.OrderHeader.Update(orderHeaderFromDb);
 			_unitOfWork.Save();
 
-			TempData["Success"] = "Order Details Updated Successfully.";
+            TempData["Success"] = "Деталі замовлення успішно оновлено!";
 
             return RedirectToAction(nameof(Details), new { orderId = orderHeaderFromDb.Id });
         }
@@ -75,7 +75,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 			_unitOfWork.OrderHeader.UpdateStatus(OrderVM.OrderHeader.Id, SD.StatusInProcess);
 			_unitOfWork.Save();
 
-            TempData["Success"] = "Order Details Updated Successfully.";
+            TempData["Success"] = "Почато опрацювання замовлення!";
 
             return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
         }
@@ -98,7 +98,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 			_unitOfWork.OrderHeader.Update(orderHeader);
             _unitOfWork.Save();
 
-            TempData["Success"] = "Order Shipped Successfully.";
+            TempData["Success"] = "Замовлення успішно відвантажено!";
 
             return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
         }
@@ -133,7 +133,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 
             _unitOfWork.Save();
 
-            TempData["Success"] = "Order Cancelled Successfully.";
+            TempData["Success"] = "Замовлення успішно відмінено!";
 
             return RedirectToAction(nameof(Details), new { orderId = OrderVM.OrderHeader.Id });
         }

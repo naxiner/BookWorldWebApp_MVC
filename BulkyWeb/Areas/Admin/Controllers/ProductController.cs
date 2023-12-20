@@ -104,7 +104,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
                     _unitOfWork.Save();
                 }
 
-                TempData["success"] = "Product successfully updated/created!";
+                TempData["success"] = "Товар успішно створено/оновлено!";
                 return RedirectToAction("Index");
             }
             else

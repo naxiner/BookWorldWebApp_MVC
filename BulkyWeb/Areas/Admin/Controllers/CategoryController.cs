@@ -33,7 +33,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
             {
                 _unitOfWork.Category.Add(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Category successfully created!";
+                TempData["success"] = "Категорію успішно створено!";
                 return RedirectToAction("Index");
             }
             return View();
@@ -61,7 +61,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
             {
                 _unitOfWork.Category.Update(obj);
                 _unitOfWork.Save();
-                TempData["success"] = "Category successfully updated!";
+                TempData["success"] = "Категорію успішно відредаговано!";
                 return RedirectToAction("Index");
             }
             return View();
@@ -93,7 +93,7 @@ namespace BookWorldWeb.Areas.Admin.Controllers
 
             _unitOfWork.Category.Remove(category);
             _unitOfWork.Save();
-            TempData["success"] = "Category successfully deleted!";
+            TempData["success"] = "Категорію успішно видалено!";
             return RedirectToAction("Index");
         }
     }
